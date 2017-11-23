@@ -33,9 +33,11 @@
             this.lbApellidos = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.tbApellidos = new System.Windows.Forms.TextBox();
-            this.tbFecNac = new System.Windows.Forms.TextBox();
             this.lbFecNac = new System.Windows.Forms.Label();
             this.lbFoto = new System.Windows.Forms.Label();
+            this.pbFoto = new System.Windows.Forms.PictureBox();
+            this.btBuscarFoto = new System.Windows.Forms.Button();
+            this.mtbFecNac = new System.Windows.Forms.MaskedTextBox();
             this.gbDireccion = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbDireccion = new System.Windows.Forms.Label();
@@ -51,21 +53,36 @@
             this.gbDatosEmpresa = new System.Windows.Forms.GroupBox();
             this.tblDatosEmpresa = new System.Windows.Forms.TableLayoutPanel();
             this.lbId = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbId = new System.Windows.Forms.TextBox();
             this.lbFecCon = new System.Windows.Forms.Label();
             this.lbTelefono = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.checkUsuario = new System.Windows.Forms.CheckBox();
             this.lbObservaciones = new System.Windows.Forms.Label();
             this.tbObservaciones = new System.Windows.Forms.TextBox();
+            this.mtbFecContr = new System.Windows.Forms.MaskedTextBox();
+            this.mtbTelefono = new System.Windows.Forms.MaskedTextBox();
+            this.gbLogin = new System.Windows.Forms.GroupBox();
+            this.tblAcceso = new System.Windows.Forms.TableLayoutPanel();
+            this.lbUsuario = new System.Windows.Forms.Label();
+            this.lbContraseña = new System.Windows.Forms.Label();
+            this.tbUsuario = new System.Windows.Forms.TextBox();
+            this.tbContraseña = new System.Windows.Forms.TextBox();
+            this.lbFotoPath = new System.Windows.Forms.Label();
+            this.btFotoPath = new System.Windows.Forms.Button();
+            this.pbFotoPath = new System.Windows.Forms.PictureBox();
+            this.btCancelar = new System.Windows.Forms.Button();
+            this.btAceptar = new System.Windows.Forms.Button();
             this.tblPrincipal.SuspendLayout();
             this.gbDatosPersonales.SuspendLayout();
             this.tblDatosPersonales.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             this.gbDireccion.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbDatosEmpresa.SuspendLayout();
             this.tblDatosEmpresa.SuspendLayout();
+            this.gbLogin.SuspendLayout();
+            this.tblAcceso.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPath)).BeginInit();
             this.SuspendLayout();
             // 
             // tblPrincipal
@@ -76,6 +93,7 @@
             this.tblPrincipal.Controls.Add(this.gbDatosPersonales, 0, 0);
             this.tblPrincipal.Controls.Add(this.gbDireccion, 1, 0);
             this.tblPrincipal.Controls.Add(this.gbDatosEmpresa, 0, 1);
+            this.tblPrincipal.Controls.Add(this.gbLogin, 1, 1);
             this.tblPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tblPrincipal.MinimumSize = new System.Drawing.Size(640, 460);
@@ -83,7 +101,7 @@
             this.tblPrincipal.RowCount = 2;
             this.tblPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblPrincipal.Size = new System.Drawing.Size(640, 461);
+            this.tblPrincipal.Size = new System.Drawing.Size(764, 521);
             this.tblPrincipal.TabIndex = 0;
             // 
             // gbDatosPersonales
@@ -92,23 +110,27 @@
             this.gbDatosPersonales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDatosPersonales.Location = new System.Drawing.Point(3, 3);
             this.gbDatosPersonales.Name = "gbDatosPersonales";
-            this.gbDatosPersonales.Size = new System.Drawing.Size(314, 224);
+            this.gbDatosPersonales.Size = new System.Drawing.Size(376, 224);
             this.gbDatosPersonales.TabIndex = 0;
             this.gbDatosPersonales.TabStop = false;
             this.gbDatosPersonales.Text = "Datos personales";
             // 
             // tblDatosPersonales
             // 
-            this.tblDatosPersonales.ColumnCount = 2;
+            this.tblDatosPersonales.ColumnCount = 3;
             this.tblDatosPersonales.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblDatosPersonales.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblDatosPersonales.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblDatosPersonales.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblDatosPersonales.Controls.Add(this.lbNombre, 0, 0);
             this.tblDatosPersonales.Controls.Add(this.lbApellidos, 0, 1);
-            this.tblDatosPersonales.Controls.Add(this.tbNombre, 1, 0);
-            this.tblDatosPersonales.Controls.Add(this.tbApellidos, 1, 1);
-            this.tblDatosPersonales.Controls.Add(this.tbFecNac, 1, 2);
+            this.tblDatosPersonales.Controls.Add(this.tbNombre, 2, 0);
+            this.tblDatosPersonales.Controls.Add(this.tbApellidos, 2, 1);
             this.tblDatosPersonales.Controls.Add(this.lbFecNac, 0, 2);
             this.tblDatosPersonales.Controls.Add(this.lbFoto, 0, 3);
+            this.tblDatosPersonales.Controls.Add(this.pbFoto, 2, 3);
+            this.tblDatosPersonales.Controls.Add(this.btBuscarFoto, 1, 3);
+            this.tblDatosPersonales.Controls.Add(this.mtbFecNac, 2, 2);
             this.tblDatosPersonales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblDatosPersonales.Location = new System.Drawing.Point(3, 16);
             this.tblDatosPersonales.Name = "tblDatosPersonales";
@@ -117,7 +139,7 @@
             this.tblDatosPersonales.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblDatosPersonales.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblDatosPersonales.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblDatosPersonales.Size = new System.Drawing.Size(308, 205);
+            this.tblDatosPersonales.Size = new System.Drawing.Size(370, 205);
             this.tblDatosPersonales.TabIndex = 0;
             // 
             // lbNombre
@@ -128,7 +150,7 @@
             this.lbNombre.Name = "lbNombre";
             this.lbNombre.Size = new System.Drawing.Size(93, 13);
             this.lbNombre.TabIndex = 0;
-            this.lbNombre.Text = "Nombre";
+            this.lbNombre.Text = "Nombre *";
             // 
             // lbApellidos
             // 
@@ -138,31 +160,23 @@
             this.lbApellidos.Name = "lbApellidos";
             this.lbApellidos.Size = new System.Drawing.Size(93, 13);
             this.lbApellidos.TabIndex = 1;
-            this.lbApellidos.Text = "Apellidos";
+            this.lbApellidos.Text = "Apellidos *";
             // 
             // tbNombre
             // 
             this.tbNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNombre.Location = new System.Drawing.Point(102, 3);
+            this.tbNombre.Location = new System.Drawing.Point(148, 3);
             this.tbNombre.Name = "tbNombre";
-            this.tbNombre.Size = new System.Drawing.Size(203, 20);
+            this.tbNombre.Size = new System.Drawing.Size(219, 20);
             this.tbNombre.TabIndex = 1;
             // 
             // tbApellidos
             // 
             this.tbApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbApellidos.Location = new System.Drawing.Point(102, 29);
+            this.tbApellidos.Location = new System.Drawing.Point(148, 29);
             this.tbApellidos.Name = "tbApellidos";
-            this.tbApellidos.Size = new System.Drawing.Size(203, 20);
+            this.tbApellidos.Size = new System.Drawing.Size(219, 20);
             this.tbApellidos.TabIndex = 2;
-            // 
-            // tbFecNac
-            // 
-            this.tbFecNac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFecNac.Location = new System.Drawing.Point(102, 55);
-            this.tbFecNac.Name = "tbFecNac";
-            this.tbFecNac.Size = new System.Drawing.Size(203, 20);
-            this.tbFecNac.TabIndex = 3;
             // 
             // lbFecNac
             // 
@@ -184,13 +198,43 @@
             this.lbFoto.TabIndex = 6;
             this.lbFoto.Text = "Foto";
             // 
+            // pbFoto
+            // 
+            this.pbFoto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbFoto.Location = new System.Drawing.Point(148, 81);
+            this.pbFoto.Name = "pbFoto";
+            this.pbFoto.Size = new System.Drawing.Size(219, 121);
+            this.pbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFoto.TabIndex = 7;
+            this.pbFoto.TabStop = false;
+            // 
+            // btBuscarFoto
+            // 
+            this.btBuscarFoto.Location = new System.Drawing.Point(102, 81);
+            this.btBuscarFoto.Name = "btBuscarFoto";
+            this.btBuscarFoto.Size = new System.Drawing.Size(40, 25);
+            this.btBuscarFoto.TabIndex = 9;
+            this.btBuscarFoto.Text = "...";
+            this.btBuscarFoto.UseVisualStyleBackColor = true;
+            this.btBuscarFoto.Click += new System.EventHandler(this.btBuscarFoto_Click);
+            // 
+            // mtbFecNac
+            // 
+            this.mtbFecNac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtbFecNac.Location = new System.Drawing.Point(148, 55);
+            this.mtbFecNac.Mask = "00/00/0000";
+            this.mtbFecNac.Name = "mtbFecNac";
+            this.mtbFecNac.Size = new System.Drawing.Size(219, 20);
+            this.mtbFecNac.TabIndex = 10;
+            this.mtbFecNac.ValidatingType = typeof(System.DateTime);
+            // 
             // gbDireccion
             // 
             this.gbDireccion.Controls.Add(this.tableLayoutPanel1);
             this.gbDireccion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbDireccion.Location = new System.Drawing.Point(323, 3);
+            this.gbDireccion.Location = new System.Drawing.Point(385, 3);
             this.gbDireccion.Name = "gbDireccion";
-            this.gbDireccion.Size = new System.Drawing.Size(314, 224);
+            this.gbDireccion.Size = new System.Drawing.Size(376, 224);
             this.gbDireccion.TabIndex = 1;
             this.gbDireccion.TabStop = false;
             this.gbDireccion.Text = "Dirección";
@@ -219,7 +263,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(308, 205);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 205);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lbDireccion
@@ -247,7 +291,7 @@
             this.tbDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDireccion.Location = new System.Drawing.Point(61, 3);
             this.tbDireccion.Name = "tbDireccion";
-            this.tbDireccion.Size = new System.Drawing.Size(244, 20);
+            this.tbDireccion.Size = new System.Drawing.Size(306, 20);
             this.tbDireccion.TabIndex = 4;
             // 
             // tbCiudad
@@ -255,7 +299,7 @@
             this.tbCiudad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCiudad.Location = new System.Drawing.Point(61, 29);
             this.tbCiudad.Name = "tbCiudad";
-            this.tbCiudad.Size = new System.Drawing.Size(244, 20);
+            this.tbCiudad.Size = new System.Drawing.Size(306, 20);
             this.tbCiudad.TabIndex = 5;
             // 
             // lbPais
@@ -276,7 +320,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPais.Location = new System.Drawing.Point(61, 107);
             this.tbPais.Name = "tbPais";
-            this.tbPais.Size = new System.Drawing.Size(244, 20);
+            this.tbPais.Size = new System.Drawing.Size(306, 20);
             this.tbPais.TabIndex = 8;
             // 
             // tbRegion
@@ -284,7 +328,7 @@
             this.tbRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRegion.Location = new System.Drawing.Point(61, 81);
             this.tbRegion.Name = "tbRegion";
-            this.tbRegion.Size = new System.Drawing.Size(244, 20);
+            this.tbRegion.Size = new System.Drawing.Size(306, 20);
             this.tbRegion.TabIndex = 7;
             // 
             // tbCp
@@ -292,7 +336,7 @@
             this.tbCp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCp.Location = new System.Drawing.Point(61, 55);
             this.tbCp.Name = "tbCp";
-            this.tbCp.Size = new System.Drawing.Size(244, 20);
+            this.tbCp.Size = new System.Drawing.Size(306, 20);
             this.tbCp.TabIndex = 6;
             // 
             // lbCp
@@ -321,7 +365,7 @@
             this.gbDatosEmpresa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDatosEmpresa.Location = new System.Drawing.Point(3, 233);
             this.gbDatosEmpresa.Name = "gbDatosEmpresa";
-            this.gbDatosEmpresa.Size = new System.Drawing.Size(314, 225);
+            this.gbDatosEmpresa.Size = new System.Drawing.Size(376, 285);
             this.gbDatosEmpresa.TabIndex = 2;
             this.gbDatosEmpresa.TabStop = false;
             this.gbDatosEmpresa.Text = "groupBox1";
@@ -332,14 +376,14 @@
             this.tblDatosEmpresa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblDatosEmpresa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblDatosEmpresa.Controls.Add(this.lbId, 0, 0);
-            this.tblDatosEmpresa.Controls.Add(this.textBox1, 1, 0);
-            this.tblDatosEmpresa.Controls.Add(this.textBox2, 1, 1);
+            this.tblDatosEmpresa.Controls.Add(this.tbId, 1, 0);
             this.tblDatosEmpresa.Controls.Add(this.lbFecCon, 0, 1);
             this.tblDatosEmpresa.Controls.Add(this.lbTelefono, 0, 2);
-            this.tblDatosEmpresa.Controls.Add(this.textBox3, 1, 2);
             this.tblDatosEmpresa.Controls.Add(this.checkUsuario, 1, 3);
             this.tblDatosEmpresa.Controls.Add(this.lbObservaciones, 0, 4);
             this.tblDatosEmpresa.Controls.Add(this.tbObservaciones, 1, 4);
+            this.tblDatosEmpresa.Controls.Add(this.mtbFecContr, 1, 1);
+            this.tblDatosEmpresa.Controls.Add(this.mtbTelefono, 1, 2);
             this.tblDatosEmpresa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblDatosEmpresa.Location = new System.Drawing.Point(3, 16);
             this.tblDatosEmpresa.Name = "tblDatosEmpresa";
@@ -349,7 +393,7 @@
             this.tblDatosEmpresa.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblDatosEmpresa.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblDatosEmpresa.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblDatosEmpresa.Size = new System.Drawing.Size(308, 206);
+            this.tblDatosEmpresa.Size = new System.Drawing.Size(370, 266);
             this.tblDatosEmpresa.TabIndex = 0;
             // 
             // lbId
@@ -362,22 +406,13 @@
             this.lbId.TabIndex = 0;
             this.lbId.Text = "ID";
             // 
-            // textBox1
+            // tbId
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(123, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(182, 20);
-            this.textBox1.TabIndex = 9;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(123, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(182, 20);
-            this.textBox2.TabIndex = 10;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tbId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbId.Location = new System.Drawing.Point(123, 3);
+            this.tbId.Name = "tbId";
+            this.tbId.Size = new System.Drawing.Size(244, 20);
+            this.tbId.TabIndex = 9;
             // 
             // lbFecCon
             // 
@@ -399,21 +434,13 @@
             this.lbTelefono.TabIndex = 4;
             this.lbTelefono.Text = "Teléfono";
             // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(123, 55);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(182, 20);
-            this.textBox3.TabIndex = 11;
-            // 
             // checkUsuario
             // 
             this.checkUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkUsuario.AutoSize = true;
             this.checkUsuario.Location = new System.Drawing.Point(123, 81);
             this.checkUsuario.Name = "checkUsuario";
-            this.checkUsuario.Size = new System.Drawing.Size(182, 17);
+            this.checkUsuario.Size = new System.Drawing.Size(244, 17);
             this.checkUsuario.TabIndex = 12;
             this.checkUsuario.Text = "Es usuario";
             this.checkUsuario.UseVisualStyleBackColor = true;
@@ -434,28 +461,183 @@
             this.tbObservaciones.Location = new System.Drawing.Point(123, 104);
             this.tbObservaciones.Multiline = true;
             this.tbObservaciones.Name = "tbObservaciones";
-            this.tbObservaciones.Size = new System.Drawing.Size(182, 99);
+            this.tbObservaciones.Size = new System.Drawing.Size(244, 159);
             this.tbObservaciones.TabIndex = 13;
+            // 
+            // mtbFecContr
+            // 
+            this.mtbFecContr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtbFecContr.Location = new System.Drawing.Point(123, 29);
+            this.mtbFecContr.Mask = "00/00/0000";
+            this.mtbFecContr.Name = "mtbFecContr";
+            this.mtbFecContr.Size = new System.Drawing.Size(244, 20);
+            this.mtbFecContr.TabIndex = 14;
+            this.mtbFecContr.ValidatingType = typeof(System.DateTime);
+            // 
+            // mtbTelefono
+            // 
+            this.mtbTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtbTelefono.Location = new System.Drawing.Point(123, 55);
+            this.mtbTelefono.Mask = "999-999-999";
+            this.mtbTelefono.Name = "mtbTelefono";
+            this.mtbTelefono.Size = new System.Drawing.Size(244, 20);
+            this.mtbTelefono.TabIndex = 15;
+            // 
+            // gbLogin
+            // 
+            this.gbLogin.Controls.Add(this.tblAcceso);
+            this.gbLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbLogin.Location = new System.Drawing.Point(385, 233);
+            this.gbLogin.Name = "gbLogin";
+            this.gbLogin.Size = new System.Drawing.Size(376, 285);
+            this.gbLogin.TabIndex = 3;
+            this.gbLogin.TabStop = false;
+            this.gbLogin.Text = "Datos de acceso";
+            // 
+            // tblAcceso
+            // 
+            this.tblAcceso.ColumnCount = 4;
+            this.tblAcceso.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblAcceso.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblAcceso.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tblAcceso.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tblAcceso.Controls.Add(this.lbUsuario, 0, 0);
+            this.tblAcceso.Controls.Add(this.lbContraseña, 0, 1);
+            this.tblAcceso.Controls.Add(this.tbUsuario, 2, 0);
+            this.tblAcceso.Controls.Add(this.tbContraseña, 2, 1);
+            this.tblAcceso.Controls.Add(this.lbFotoPath, 0, 2);
+            this.tblAcceso.Controls.Add(this.btFotoPath, 1, 2);
+            this.tblAcceso.Controls.Add(this.pbFotoPath, 2, 2);
+            this.tblAcceso.Controls.Add(this.btCancelar, 2, 3);
+            this.tblAcceso.Controls.Add(this.btAceptar, 3, 3);
+            this.tblAcceso.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblAcceso.Location = new System.Drawing.Point(3, 16);
+            this.tblAcceso.Name = "tblAcceso";
+            this.tblAcceso.RowCount = 4;
+            this.tblAcceso.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblAcceso.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblAcceso.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tblAcceso.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblAcceso.Size = new System.Drawing.Size(370, 266);
+            this.tblAcceso.TabIndex = 0;
+            this.tblAcceso.Paint += new System.Windows.Forms.PaintEventHandler(this.tblAcceso_Paint);
+            // 
+            // lbUsuario
+            // 
+            this.lbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbUsuario.AutoSize = true;
+            this.lbUsuario.Location = new System.Drawing.Point(3, 6);
+            this.lbUsuario.Name = "lbUsuario";
+            this.lbUsuario.Size = new System.Drawing.Size(61, 13);
+            this.lbUsuario.TabIndex = 0;
+            this.lbUsuario.Text = "Usuario *";
+            // 
+            // lbContraseña
+            // 
+            this.lbContraseña.AutoSize = true;
+            this.lbContraseña.Location = new System.Drawing.Point(3, 31);
+            this.lbContraseña.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.lbContraseña.Name = "lbContraseña";
+            this.lbContraseña.Size = new System.Drawing.Size(61, 13);
+            this.lbContraseña.TabIndex = 1;
+            this.lbContraseña.Text = "Contraseña";
+            // 
+            // tbUsuario
+            // 
+            this.tbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tblAcceso.SetColumnSpan(this.tbUsuario, 2);
+            this.tbUsuario.Location = new System.Drawing.Point(116, 3);
+            this.tbUsuario.Name = "tbUsuario";
+            this.tbUsuario.Size = new System.Drawing.Size(251, 20);
+            this.tbUsuario.TabIndex = 2;
+            // 
+            // tbContraseña
+            // 
+            this.tbContraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tblAcceso.SetColumnSpan(this.tbContraseña, 2);
+            this.tbContraseña.Location = new System.Drawing.Point(116, 29);
+            this.tbContraseña.Name = "tbContraseña";
+            this.tbContraseña.PasswordChar = '*';
+            this.tbContraseña.Size = new System.Drawing.Size(251, 20);
+            this.tbContraseña.TabIndex = 3;
+            // 
+            // lbFotoPath
+            // 
+            this.lbFotoPath.AutoSize = true;
+            this.lbFotoPath.Location = new System.Drawing.Point(3, 57);
+            this.lbFotoPath.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.lbFotoPath.Name = "lbFotoPath";
+            this.lbFotoPath.Size = new System.Drawing.Size(52, 13);
+            this.lbFotoPath.TabIndex = 4;
+            this.lbFotoPath.Text = "Foto path";
+            // 
+            // btFotoPath
+            // 
+            this.btFotoPath.Location = new System.Drawing.Point(70, 55);
+            this.btFotoPath.Name = "btFotoPath";
+            this.btFotoPath.Size = new System.Drawing.Size(40, 25);
+            this.btFotoPath.TabIndex = 5;
+            this.btFotoPath.Text = "...";
+            this.btFotoPath.UseVisualStyleBackColor = true;
+            this.btFotoPath.Click += new System.EventHandler(this.btFotoPath_Click);
+            // 
+            // pbFotoPath
+            // 
+            this.tblAcceso.SetColumnSpan(this.pbFotoPath, 2);
+            this.pbFotoPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbFotoPath.Location = new System.Drawing.Point(116, 55);
+            this.pbFotoPath.Name = "pbFotoPath";
+            this.pbFotoPath.Size = new System.Drawing.Size(251, 165);
+            this.pbFotoPath.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFotoPath.TabIndex = 6;
+            this.pbFotoPath.TabStop = false;
+            // 
+            // btCancelar
+            // 
+            this.btCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCancelar.Location = new System.Drawing.Point(214, 240);
+            this.btCancelar.Name = "btCancelar";
+            this.btCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btCancelar.TabIndex = 7;
+            this.btCancelar.Text = "Cancelar";
+            this.btCancelar.UseVisualStyleBackColor = true;
+            // 
+            // btAceptar
+            // 
+            this.btAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAceptar.Location = new System.Drawing.Point(295, 240);
+            this.btAceptar.Name = "btAceptar";
+            this.btAceptar.Size = new System.Drawing.Size(72, 23);
+            this.btAceptar.TabIndex = 8;
+            this.btAceptar.Text = "Aceptar";
+            this.btAceptar.UseVisualStyleBackColor = true;
             // 
             // FormularioEmpleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 461);
+            this.ClientSize = new System.Drawing.Size(764, 521);
             this.Controls.Add(this.tblPrincipal);
-            this.MinimumSize = new System.Drawing.Size(655, 500);
+            this.MinimumSize = new System.Drawing.Size(780, 560);
             this.Name = "FormularioEmpleados";
             this.Text = "FormularioEmpleados";
+            this.Load += new System.EventHandler(this.FormularioEmpleados_Load);
             this.tblPrincipal.ResumeLayout(false);
             this.gbDatosPersonales.ResumeLayout(false);
             this.tblDatosPersonales.ResumeLayout(false);
             this.tblDatosPersonales.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
             this.gbDireccion.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.gbDatosEmpresa.ResumeLayout(false);
             this.tblDatosEmpresa.ResumeLayout(false);
             this.tblDatosEmpresa.PerformLayout();
+            this.gbLogin.ResumeLayout(false);
+            this.tblAcceso.ResumeLayout(false);
+            this.tblAcceso.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPath)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,7 +651,6 @@
         private System.Windows.Forms.Label lbApellidos;
         private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.TextBox tbApellidos;
-        private System.Windows.Forms.TextBox tbFecNac;
         private System.Windows.Forms.Label lbFecNac;
         private System.Windows.Forms.Label lbFoto;
         private System.Windows.Forms.GroupBox gbDireccion;
@@ -487,13 +668,27 @@
         private System.Windows.Forms.GroupBox gbDatosEmpresa;
         private System.Windows.Forms.TableLayoutPanel tblDatosEmpresa;
         private System.Windows.Forms.Label lbId;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbId;
         private System.Windows.Forms.Label lbFecCon;
         private System.Windows.Forms.Label lbTelefono;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.CheckBox checkUsuario;
         private System.Windows.Forms.Label lbObservaciones;
         private System.Windows.Forms.TextBox tbObservaciones;
+        private System.Windows.Forms.PictureBox pbFoto;
+        private System.Windows.Forms.Button btBuscarFoto;
+        private System.Windows.Forms.GroupBox gbLogin;
+        private System.Windows.Forms.TableLayoutPanel tblAcceso;
+        private System.Windows.Forms.Label lbUsuario;
+        private System.Windows.Forms.Label lbContraseña;
+        private System.Windows.Forms.TextBox tbUsuario;
+        private System.Windows.Forms.TextBox tbContraseña;
+        private System.Windows.Forms.Label lbFotoPath;
+        private System.Windows.Forms.Button btFotoPath;
+        private System.Windows.Forms.PictureBox pbFotoPath;
+        private System.Windows.Forms.Button btCancelar;
+        private System.Windows.Forms.Button btAceptar;
+        private System.Windows.Forms.MaskedTextBox mtbFecNac;
+        private System.Windows.Forms.MaskedTextBox mtbFecContr;
+        private System.Windows.Forms.MaskedTextBox mtbTelefono;
     }
 }
