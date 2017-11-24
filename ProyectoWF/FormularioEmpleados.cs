@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ProyectoWF {
     public partial class FormularioEmpleados : Form {
@@ -13,6 +14,7 @@ namespace ProyectoWF {
         private int pk;
         private SqlConnection conn;
         private SqlCommand insertarEmpleado;
+        private string imagen = "";
 
         // Constructor
         public FormularioEmpleados(int modo, int pk)
@@ -26,29 +28,8 @@ namespace ProyectoWF {
             conn = Conexion.getConexion();
             if (conn != null)
             {
-                insertarEmpleado = new SqlCommand("INSERT INTO empleados VALUES(@Id, @Apellidos, @Nombre, @FecNac, @FecCont, @Direccion, @Ciudad, @Region, @Cp, @Pais, @Telefono, @Observaciones" +
-                    ", @EsUsuario, @Usuario, @Password)", conn);
-                insertarEmpleado.Parameters.AddWithValue("@Id", SqlDbType.Int);
-                insertarEmpleado.Parameters.AddWithValue("@Apellidos", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Nombre", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@FecNac", SqlDbType.DateTime);
-                insertarEmpleado.Parameters.AddWithValue("@FecCont", SqlDbType.DateTime);
-                insertarEmpleado.Parameters.AddWithValue("@Direccion", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Ciudad", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Region", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Cp", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Pais", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Telefono", SqlDbType.NVarChar);
-
-                insertarEmpleado.Parameters.AddWithValue("@Foto", SqlDbType.Image);
-
-                insertarEmpleado.Parameters.AddWithValue("@Observaciones", SqlDbType.NText);
-
-                insertarEmpleado.Parameters.AddWithValue("@FotoPath", SqlDbType.Image);
-
-                insertarEmpleado.Parameters.AddWithValue("@EsUsuario", SqlDbType.Bit);
-                insertarEmpleado.Parameters.AddWithValue("@Usuario", SqlDbType.NVarChar);
-                insertarEmpleado.Parameters.AddWithValue("@Password", SqlDbType.NVarChar);                
+                insertarEmpleado = new SqlCommand("INSERT INTO empleados VALUES(@Apellidos, @Nombre, @FecNac, @FecCont, @Direccion, @Ciudad, @Region, @Cp, @Pais, @Telefono," +
+                    "@Foto, @Observaciones, @FotoPath, @EsUsuario, @Usuario, @Password)", conn);
             }
 
             if (modo == 0) {
@@ -63,20 +44,19 @@ namespace ProyectoWF {
                 this.Text = "Datos de empleado";
                 tbNombre.Enabled = false;
                 tbApellidos.Enabled = false;
-                mtbFecNac.Enabled = false;
+                dtpFecNac.Enabled = false;
                 tbDireccion.Enabled = false;
                 tbCiudad.Enabled = false;
                 tbCp.Enabled = false;
                 tbRegion.Enabled = false;
                 tbPais.Enabled = false;
-                mtbFecContr.Enabled = false;
+                dtpFecCon.Enabled = false;
                 mtbTelefono.Enabled = false;
                 checkUsuario.Enabled = false;
                 tbObservaciones.Enabled = false;
                 tbUsuario.Enabled = false;
                 tbContraseña.Enabled = false;
                 btBuscarFoto.Enabled = false;
-                btFotoPath.Enabled = false;
 
             }
         }
@@ -86,27 +66,11 @@ namespace ProyectoWF {
             try
             {
                 OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
-                    string imagen = openFile.FileName;
+                    imagen = openFile.FileName;
                     pbFoto.Image = Image.FromFile(imagen);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("El archivo seleccionado no es un tipo de imagen válido " + ex.ToString());
-            }
-        }
-
-        private void btFotoPath_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog openFile = new OpenFileDialog();
-                if (openFile.ShowDialog() == DialogResult.OK)
-                {
-                    string imagen = openFile.FileName;
-                    pbFotoPath.Image = Image.FromFile(imagen);
                 }
             }
             catch (Exception ex)
@@ -139,40 +103,53 @@ namespace ProyectoWF {
                             MessageBox.Show("Error! Rellena todos los campos obligatorios!");
                             return;
                         }
-                        MessageBox.Show(mtbFecNac.Text);
-                        insertarEmpleado.Parameters["@Id"].Value = "1";
-                        insertarEmpleado.Parameters["@Apellidos"].Value = tbApellidos.Text;
-                        insertarEmpleado.Parameters["@Nombre"].Value = tbNombre.Text;
-                        insertarEmpleado.Parameters["@FecNac"].Value = mtbFecNac.Text;
-                        insertarEmpleado.Parameters["@FecCont"].Value = mtbFecContr.Text;
-                        insertarEmpleado.Parameters["@Direccion"].Value = tbDireccion.Text;
-                        insertarEmpleado.Parameters["@Ciudad"].Value = tbCiudad.Text;
-                        insertarEmpleado.Parameters["@Region"].Value = tbRegion.Text;
-                        insertarEmpleado.Parameters["@Cp"].Value = tbCp.Text;
-                        insertarEmpleado.Parameters["@Pais"].Value = tbPais.Text;
-                        insertarEmpleado.Parameters["@Telefono"].Value = mtbTelefono.Text;
-                        //string ruta = Application.StartupPath + pbFoto.ImageLocation;
-                        //FileStream fs = new FileStream(ruta, FileMode.Open);
-                        //BinaryReader br = new BinaryReader(fs);
-                        //byte[] imagen = new byte[(int)fs.Length];
-                        //br.Read(imagen, 0, (int)fs.Length);
-                        //br.Close();
-                        //fs.Close();
+                        insertarEmpleado.Parameters.Clear();
+                        insertarEmpleado.Parameters.AddWithValue("@Apellidos", tbApellidos.Text);
+                        insertarEmpleado.Parameters.AddWithValue("@Nombre", tbNombre.Text);
+                        insertarEmpleado.Parameters.AddWithValue("@FecNac", SqlDbType.DateTime).Value = dtpFecNac.Value;
+                        insertarEmpleado.Parameters.AddWithValue("@FecCont", SqlDbType.DateTime).Value = dtpFecCon.Value;
+                        insertarEmpleado.Parameters.AddWithValue("@Direccion", tbDireccion.Text);
+                        insertarEmpleado.Parameters.AddWithValue("@Ciudad", tbCiudad.Text);
+                        insertarEmpleado.Parameters.AddWithValue("@Region", tbRegion.Text);
 
+                        insertarEmpleado.Parameters.AddWithValue("@Cp", tbCp.Text);
+                        insertarEmpleado.Parameters.AddWithValue("@Pais", tbPais.Text);
 
-                        insertarEmpleado.Parameters["@Foto"].Value = "";
+                        if (mtbTelefono.MaskFull)
+                        {
+                            insertarEmpleado.Parameters.AddWithValue("@Telefono", mtbTelefono.Text);
+                        } else
+                        {
+                            insertarEmpleado.Parameters.AddWithValue("@Telefono", DBNull.Value);
+                        }
 
-                        insertarEmpleado.Parameters["@Observaciones"].Value = tbObservaciones.Text;
+                        if (imagen.Length > 0)
+                        {
+                            byte[] imageData;
+                            imageData = File.ReadAllBytes(@imagen);
+                            insertarEmpleado.Parameters.Add("@Foto", SqlDbType.Image).Value = imageData;
+                        } else
+                        {
+                            // otra consulta.
+                        }
 
-                        insertarEmpleado.Parameters["@FotoPath"].Value = pbFotoPath.Image;
+                        insertarEmpleado.Parameters.AddWithValue("@Observaciones", tbObservaciones.Text);
 
-                        insertarEmpleado.Parameters["@EsUsuario"].Value = checkUsuario.Checked;
-                        insertarEmpleado.Parameters["@Usuario"].Value = tbUsuario.Text;                        
-                        insertarEmpleado.Parameters["@Password"].Value = tbContraseña.Text;
+                        insertarEmpleado.Parameters.AddWithValue("@FotoPath", "alguien");
 
+                        insertarEmpleado.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
+                        insertarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+
+                        // Encriptamos la contraseña
+                        byte[] data = new byte[tbContraseña.Text.Length];
+                        byte[] contraseña;
+                        SHA512 shaM = new SHA512Managed();
+                        contraseña = shaM.ComputeHash(data);
+                        insertarEmpleado.Parameters.AddWithValue("@Password", contraseña);
                         try
                         {
                             insertarEmpleado.ExecuteNonQuery();
+                            MessageBox.Show("Empleado dado de alta","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                         }
                         catch (SqlException sql)
                         {
@@ -210,6 +187,11 @@ namespace ProyectoWF {
             {
                 MessageBox.Show(sql.ToString());
             }
+        }
+
+        private void checkUsuario_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
