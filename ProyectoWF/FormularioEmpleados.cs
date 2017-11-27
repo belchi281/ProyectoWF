@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
@@ -38,6 +39,7 @@ namespace ProyectoWF {
             } else if (modo == 1) {
                 // Modificacion
                 this.Text = "Modificacion de empleado";
+                datosEmpleado();
                 
             } else if (modo == 2) {
                 // Vista de datos
@@ -146,6 +148,7 @@ namespace ProyectoWF {
                         SHA512 shaM = new SHA512Managed();
                         contraseña = shaM.ComputeHash(data);
                         insertarEmpleado.Parameters.AddWithValue("@Password", contraseña);
+
                         try
                         {
                             insertarEmpleado.ExecuteNonQuery();
@@ -175,13 +178,43 @@ namespace ProyectoWF {
             try
             {
 
-                SqlCommand consultarEmpleado = new SqlCommand("Select * From empleados WHERE id = @id", conn);
+                SqlCommand consultarEmpleado = new SqlCommand("Select * From empleados WHERE EmpleadoID = @id", conn);
                 consultarEmpleado.Parameters.AddWithValue("@id", pk);
                 SqlDataReader dr = consultarEmpleado.ExecuteReader();
 
                 if (dr.Read())
                 {
-                    
+                    tbId.Text = dr.GetInt32(0) + "";
+                    tbApellidos.Text = dr.GetString(1);
+                    tbNombre.Text = dr.GetString(2);
+                    try
+                    {
+                        dtpFecNac.Text = dr.GetDateTime(3).ToLongDateString();
+                        dtpFecCon.Text = dr.GetDateTime(4).ToLongDateString();
+                        tbDireccion.Text = dr.GetString(5);
+                        tbCiudad.Text = dr.GetString(6);
+                        tbRegion.Text = dr.GetString(7);
+                        tbCp.Text = dr.GetString(8);
+                        tbPais.Text = dr.GetString(9);
+                        mtbTelefono.Text = dr.GetString(10);
+                        // foto
+                        tbObservaciones.Text = dr.GetString(12);
+                        // fotoPath                        
+                    } catch (SqlNullValueException sqlN) {
+                    } catch (InvalidOperationException ioe) {
+                    }
+
+                    if (dr.GetBoolean(14)) {
+                        checkUsuario.Enabled = true;
+                        tbUsuario.Text = dr.GetString(15);
+                        tbUsuario.Enabled = true;
+                        tbContraseña.Enabled = true;
+                    } else {
+                        checkUsuario.Enabled = false;
+                        tbUsuario.Enabled = false;
+                        tbContraseña.Enabled = false;
+                    }
+
                 }
             } catch (SqlException sql)
             {
@@ -190,6 +223,11 @@ namespace ProyectoWF {
         }
 
         private void checkUsuario_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void limpiarCampos()
         {
 
         }
