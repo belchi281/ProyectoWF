@@ -31,14 +31,14 @@
             this.tblDatosPersonales = new System.Windows.Forms.TableLayoutPanel();
             this.lbNombre = new System.Windows.Forms.Label();
             this.lbApellidos = new System.Windows.Forms.Label();
-            this.tbNombre = new System.Windows.Forms.TextBox();
-            this.tbApellidos = new System.Windows.Forms.TextBox();
             this.lbFecNac = new System.Windows.Forms.Label();
             this.lbFoto = new System.Windows.Forms.Label();
             this.btBuscarFoto = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pbFoto = new System.Windows.Forms.PictureBox();
+            this.tbNombre = new System.Windows.Forms.TextBox();
+            this.tbApellidos = new System.Windows.Forms.TextBox();
             this.dtpFecNac = new System.Windows.Forms.DateTimePicker();
             this.gbDireccion = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,23 +58,23 @@
             this.tbId = new System.Windows.Forms.TextBox();
             this.lbFecCon = new System.Windows.Forms.Label();
             this.lbTelefono = new System.Windows.Forms.Label();
-            this.checkUsuario = new System.Windows.Forms.CheckBox();
             this.lbObservaciones = new System.Windows.Forms.Label();
             this.tbObservaciones = new System.Windows.Forms.TextBox();
             this.mtbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.dtpFecCon = new System.Windows.Forms.DateTimePicker();
             this.gbLogin = new System.Windows.Forms.GroupBox();
             this.tblAcceso = new System.Windows.Forms.TableLayoutPanel();
             this.lbUsuario = new System.Windows.Forms.Label();
             this.lbContraseña = new System.Windows.Forms.Label();
+            this.checkUsuario = new System.Windows.Forms.CheckBox();
+            this.tbUsuario = new System.Windows.Forms.TextBox();
+            this.tbContraseña = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lbCamposObligatorios = new System.Windows.Forms.Label();
             this.btCancelar = new System.Windows.Forms.Button();
             this.btAceptar = new System.Windows.Forms.Button();
-            this.tbContraseña = new System.Windows.Forms.TextBox();
-            this.tbUsuario = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpFecCon = new System.Windows.Forms.DateTimePicker();
             this.tblPrincipal.SuspendLayout();
             this.gbDatosPersonales.SuspendLayout();
             this.tblDatosPersonales.SuspendLayout();
@@ -171,22 +171,6 @@
             this.lbApellidos.TabIndex = 1;
             this.lbApellidos.Text = "Apellidos ";
             // 
-            // tbNombre
-            // 
-            this.tbNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNombre.Location = new System.Drawing.Point(148, 3);
-            this.tbNombre.Name = "tbNombre";
-            this.tbNombre.Size = new System.Drawing.Size(190, 20);
-            this.tbNombre.TabIndex = 1;
-            // 
-            // tbApellidos
-            // 
-            this.tbApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbApellidos.Location = new System.Drawing.Point(148, 29);
-            this.tbApellidos.Name = "tbApellidos";
-            this.tbApellidos.Size = new System.Drawing.Size(190, 20);
-            this.tbApellidos.TabIndex = 2;
-            // 
             // lbFecNac
             // 
             this.lbFecNac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -250,6 +234,22 @@
             this.pbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbFoto.TabIndex = 7;
             this.pbFoto.TabStop = false;
+            // 
+            // tbNombre
+            // 
+            this.tbNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbNombre.Location = new System.Drawing.Point(148, 3);
+            this.tbNombre.Name = "tbNombre";
+            this.tbNombre.Size = new System.Drawing.Size(190, 20);
+            this.tbNombre.TabIndex = 1;
+            // 
+            // tbApellidos
+            // 
+            this.tbApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbApellidos.Location = new System.Drawing.Point(148, 29);
+            this.tbApellidos.Name = "tbApellidos";
+            this.tbApellidos.Size = new System.Drawing.Size(190, 20);
+            this.tbApellidos.TabIndex = 2;
             // 
             // dtpFecNac
             // 
@@ -468,18 +468,6 @@
             this.lbTelefono.TabIndex = 4;
             this.lbTelefono.Text = "Teléfono";
             // 
-            // checkUsuario
-            // 
-            this.checkUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkUsuario.AutoSize = true;
-            this.checkUsuario.Location = new System.Drawing.Point(3, 3);
-            this.checkUsuario.Name = "checkUsuario";
-            this.checkUsuario.Size = new System.Drawing.Size(75, 17);
-            this.checkUsuario.TabIndex = 12;
-            this.checkUsuario.Text = "Es usuario";
-            this.checkUsuario.UseVisualStyleBackColor = true;
-            this.checkUsuario.CheckedChanged += new System.EventHandler(this.checkUsuario_CheckedChanged);
-            // 
             // lbObservaciones
             // 
             this.lbObservaciones.AutoSize = true;
@@ -519,6 +507,14 @@
             this.label3.Size = new System.Drawing.Size(16, 20);
             this.label3.TabIndex = 16;
             this.label3.Text = "*";
+            // 
+            // dtpFecCon
+            // 
+            this.dtpFecCon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpFecCon.Location = new System.Drawing.Point(123, 29);
+            this.dtpFecCon.Name = "dtpFecCon";
+            this.dtpFecCon.Size = new System.Drawing.Size(215, 20);
+            this.dtpFecCon.TabIndex = 17;
             // 
             // gbLogin
             // 
@@ -575,6 +571,61 @@
             this.lbContraseña.TabIndex = 1;
             this.lbContraseña.Text = "Contraseña";
             // 
+            // checkUsuario
+            // 
+            this.checkUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkUsuario.AutoSize = true;
+            this.checkUsuario.Location = new System.Drawing.Point(3, 3);
+            this.checkUsuario.Name = "checkUsuario";
+            this.checkUsuario.Size = new System.Drawing.Size(75, 17);
+            this.checkUsuario.TabIndex = 12;
+            this.checkUsuario.Text = "Es usuario";
+            this.checkUsuario.UseVisualStyleBackColor = true;
+            this.checkUsuario.CheckedChanged += new System.EventHandler(this.checkUsuario_CheckedChanged);
+            // 
+            // tbUsuario
+            // 
+            this.tbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbUsuario.Location = new System.Drawing.Point(84, 62);
+            this.tbUsuario.Name = "tbUsuario";
+            this.tbUsuario.Size = new System.Drawing.Size(268, 20);
+            this.tbUsuario.TabIndex = 2;
+            // 
+            // tbContraseña
+            // 
+            this.tbContraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbContraseña.Location = new System.Drawing.Point(84, 125);
+            this.tbContraseña.Name = "tbContraseña";
+            this.tbContraseña.PasswordChar = '*';
+            this.tbContraseña.Size = new System.Drawing.Size(268, 20);
+            this.tbContraseña.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(358, 62);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 20);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(358, 122);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "*";
+            // 
             // lbCamposObligatorios
             // 
             this.lbCamposObligatorios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -609,53 +660,6 @@
             this.btAceptar.Text = "Aceptar";
             this.btAceptar.UseVisualStyleBackColor = true;
             this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click);
-            // 
-            // tbContraseña
-            // 
-            this.tbContraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbContraseña.Location = new System.Drawing.Point(84, 125);
-            this.tbContraseña.Name = "tbContraseña";
-            this.tbContraseña.PasswordChar = '*';
-            this.tbContraseña.Size = new System.Drawing.Size(273, 20);
-            this.tbContraseña.TabIndex = 3;
-            // 
-            // tbUsuario
-            // 
-            this.tbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbUsuario.Location = new System.Drawing.Point(84, 62);
-            this.tbUsuario.Name = "tbUsuario";
-            this.tbUsuario.Size = new System.Drawing.Size(273, 20);
-            this.tbUsuario.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(363, 66);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "*";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(363, 122);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(11, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "*";
-            // 
-            // dtpFecCon
-            // 
-            this.dtpFecCon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpFecCon.Location = new System.Drawing.Point(123, 29);
-            this.dtpFecCon.Name = "dtpFecCon";
-            this.dtpFecCon.Size = new System.Drawing.Size(215, 20);
-            this.dtpFecCon.TabIndex = 17;
             // 
             // FormularioEmpleados
             // 

@@ -15,6 +15,8 @@ namespace ProyectoWF {
         private int pk;
         private SqlConnection conn;
         private SqlCommand insertarEmpleado;
+        private SqlCommand modificarEmpleado;
+        SqlCommand consultarEmpleado;
         private string imagen = "";
 
         // Constructor
@@ -31,6 +33,10 @@ namespace ProyectoWF {
             {
                 insertarEmpleado = new SqlCommand("INSERT INTO empleados VALUES(@Apellidos, @Nombre, @FecNac, @FecCont, @Direccion, @Ciudad, @Region, @Cp, @Pais, @Telefono," +
                     "@Foto, @Observaciones, @FotoPath, @EsUsuario, @Usuario, @Password)", conn);
+                modificarEmpleado = new SqlCommand("UPDATE empleados SET Apellidos = @Apellidos, Nombre = @Nombre, FechaNacimiento = @FecNac, FechaContratacion = @FecCont," +
+                    "Direccion = @Direccion, Ciudad = @Ciudad, CodigoPostal = @Cp, Pais = @Pais, Telefono = @Telefono, Foto = @Foto, Observaciones = @Observaciones, esUsuario = @EsUsuario," +
+                    "Usuario = @Usuario, Password = @Password WHERE EmpleadoId = @id", conn);
+                consultarEmpleado = new SqlCommand("Select * From empleados WHERE EmpleadoID = @id", conn);
             }
 
             if (modo == 0) {
@@ -162,6 +168,64 @@ namespace ProyectoWF {
                     }
                     break;
                 case 1:
+                    {
+                        modificarEmpleado.Parameters.Clear();
+                        modificarEmpleado.Parameters.AddWithValue("@Apellidos", tbApellidos.Text);
+                        modificarEmpleado.Parameters.AddWithValue("@Nombre", tbNombre.Text);
+                        modificarEmpleado.Parameters.AddWithValue("@FecNac", SqlDbType.DateTime).Value = dtpFecNac.Value;
+                        modificarEmpleado.Parameters.AddWithValue("@FecCont", SqlDbType.DateTime).Value = dtpFecCon.Value;
+                        modificarEmpleado.Parameters.AddWithValue("@Direccion", tbDireccion.Text);
+                        modificarEmpleado.Parameters.AddWithValue("@Ciudad", tbCiudad.Text);
+                        modificarEmpleado.Parameters.AddWithValue("@Region", tbRegion.Text);
+
+                        modificarEmpleado.Parameters.AddWithValue("@Cp", tbCp.Text);
+                        modificarEmpleado.Parameters.AddWithValue("@Pais", tbPais.Text);
+
+                        if (mtbTelefono.MaskFull)
+                        {
+                            modificarEmpleado.Parameters.AddWithValue("@Telefono", mtbTelefono.Text);
+                        }
+                        else
+                        {
+                            modificarEmpleado.Parameters.AddWithValue("@Telefono", DBNull.Value);
+                        }
+
+                        if (imagen.Length > 0)
+                        {
+                            byte[] imageData;
+                            imageData = File.ReadAllBytes(@imagen);
+                            modificarEmpleado.Parameters.Add("@Foto", SqlDbType.Image).Value = imageData;
+                        }
+                        else
+                        {
+                            // otra consulta.
+                        }
+
+                        modificarEmpleado.Parameters.AddWithValue("@Observaciones", tbObservaciones.Text);
+
+                        modificarEmpleado.Parameters.AddWithValue("@FotoPath", "alguien");
+
+                        modificarEmpleado.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
+                        modificarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+
+                        // Encriptamos la contraseña
+                            byte[] data = new byte[tbContraseña.Text.Length];
+                            byte[] contraseña;
+                            SHA512 shaM = new SHA512Managed();
+                            contraseña = shaM.ComputeHash(data);
+                            modificarEmpleado.Parameters.AddWithValue("@Password", contraseña);
+                        modificarEmpleado.Parameters.AddWithValue("@id", pk);
+
+                        try
+                        {
+                            modificarEmpleado.ExecuteNonQuery();
+                            MessageBox.Show("Empleado modificado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.ToString());
+                        }
+                    }
                     break;
                 case 2:
                     break;
@@ -170,17 +234,18 @@ namespace ProyectoWF {
 
         private void btCancelar_Click(object sender, EventArgs e)
         {
+            limpiarCampos();
             Close();
         }
 
         private void datosEmpleado()
         {
+            SqlDataReader dr = null;
             try
             {
-
-                SqlCommand consultarEmpleado = new SqlCommand("Select * From empleados WHERE EmpleadoID = @id", conn);
+                
                 consultarEmpleado.Parameters.AddWithValue("@id", pk);
-                SqlDataReader dr = consultarEmpleado.ExecuteReader();
+                dr = consultarEmpleado.ExecuteReader();
 
                 if (dr.Read())
                 {
@@ -205,12 +270,13 @@ namespace ProyectoWF {
                     }
 
                     if (dr.GetBoolean(14)) {
-                        checkUsuario.Enabled = true;
+                        checkUsuario.Checked = true;
                         tbUsuario.Text = dr.GetString(15);
+                        tbContraseña.Text = dr.GetString(16);
                         tbUsuario.Enabled = true;
                         tbContraseña.Enabled = true;
                     } else {
-                        checkUsuario.Enabled = false;
+                        checkUsuario.Checked = false;
                         tbUsuario.Enabled = false;
                         tbContraseña.Enabled = false;
                     }
@@ -219,17 +285,45 @@ namespace ProyectoWF {
             } catch (SqlException sql)
             {
                 MessageBox.Show(sql.ToString());
+            } finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+                }
             }
         }
 
         private void checkUsuario_CheckedChanged(object sender, EventArgs e)
         {
-
+            CheckBox checkUsuario = (CheckBox) sender;
+            if (checkUsuario.Checked)
+            {
+                tbUsuario.Enabled = true;
+                tbContraseña.Enabled = true;
+            } else
+            {
+                tbUsuario.Enabled = false;
+                tbContraseña.Enabled = false;
+            }
         }
 
         private void limpiarCampos()
         {
-
+            tbId.Text = "";
+            tbApellidos.Text = "";
+            tbNombre.Text = "";
+            dtpFecNac.Text = "";
+            dtpFecCon.Text = "";
+            tbDireccion.Text = "";
+            tbCiudad.Text = "";
+            tbRegion.Text = "";
+            tbCp.Text = "";
+            tbPais.Text = "";
+            mtbTelefono.Text = "";
+            pbFoto.Image = null;
+            tbObservaciones.Text = "";
+            // fotoPath 
         }
     }
 }
