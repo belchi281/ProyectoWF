@@ -55,8 +55,6 @@ namespace ProyectoWF {
             if (modo == 0) {
                 // Alta
                 this.Text = "Alta de empleado";
-                tbUsuario.Enabled = false;
-                tbContraseña.Enabled = false;
             } else if (modo == 1) {
                 // Modificacion
                 this.Text = "Modificacion de empleado";
@@ -165,21 +163,13 @@ namespace ProyectoWF {
                             insertarEmpleado.Parameters.AddWithValue("@FotoPath", "");
 
                             insertarEmpleado.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
-                            if (checkUsuario.Checked)
-                            {
-                                insertarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
-                                // Encriptamos la contraseña
-                                byte[] data = new byte[tbContraseña.Text.Length];
-                                byte[] contraseña;
-                                SHA512 shaM = new SHA512Managed();
-                                contraseña = shaM.ComputeHash(data);
-                                insertarEmpleado.Parameters.AddWithValue("@Password", contraseña);
-                            }
-                            else
-                            {
-                                insertarEmpleado.Parameters.AddWithValue("@Usuario", DBNull.Value);
-                                insertarEmpleado.Parameters.AddWithValue("@Password", DBNull.Value);
-                            }
+                            insertarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+                            // Encriptamos la contraseña
+                            byte[] data = new byte[tbContraseña.Text.Length];
+                            byte[] contraseña;
+                            SHA512 shaM = new SHA512Managed();
+                            contraseña = shaM.ComputeHash(data);
+                            insertarEmpleado.Parameters.AddWithValue("@Password", contraseña);
 
                             try
                             {
@@ -201,7 +191,6 @@ namespace ProyectoWF {
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Direccion", tbDireccion.Text);
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Ciudad", tbCiudad.Text);
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Region", tbRegion.Text);
-
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Cp", tbCp.Text);
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Pais", tbPais.Text);
 
@@ -216,23 +205,13 @@ namespace ProyectoWF {
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@Observaciones", tbObservaciones.Text);
 
                             insertarEmpleadoSinFoto.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
-                            if (checkUsuario.Checked)
-                            {
-                                insertarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
-                                // Encriptamos la contraseña
-                                byte[] data = new byte[tbContraseña.Text.Length];
-                                byte[] contraseña;
-                                SHA512 shaM = new SHA512Managed();
-                                contraseña = shaM.ComputeHash(data);
-                                insertarEmpleadoSinFoto.Parameters.AddWithValue("@Password", contraseña);
-                            } else
-                            {
-                                insertarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", DBNull.Value);
-                                insertarEmpleadoSinFoto.Parameters.AddWithValue("@Password", DBNull.Value);
-                            }
-                            
-
-                            
+                            insertarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+                            // Encriptamos la contraseña
+                            byte[] data = new byte[tbContraseña.Text.Length];
+                            byte[] contraseña;
+                            SHA512 shaM = new SHA512Managed();
+                            contraseña = shaM.ComputeHash(data);
+                            insertarEmpleadoSinFoto.Parameters.AddWithValue("@Password", contraseña);
 
                             try
                             {
@@ -283,22 +262,16 @@ namespace ProyectoWF {
                             modificarEmpleado.Parameters.AddWithValue("@FotoPath", "");
 
                             modificarEmpleado.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
-                            if (checkUsuario.Checked)
-                            {
-                                modificarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
-                                // Encriptamos la contraseña
-                                byte[] data = new byte[tbContraseña.Text.Length];
-                                byte[] contraseña;
-                                SHA512 shaM = new SHA512Managed();
-                                contraseña = shaM.ComputeHash(data);
-                                modificarEmpleado.Parameters.AddWithValue("@Password", contraseña);
-                            }
-                            else
-                            {
-                                modificarEmpleado.Parameters.AddWithValue("@Usuario", DBNull.Value);
-                                modificarEmpleado.Parameters.AddWithValue("@Password", DBNull.Value);
-                            }
+                            modificarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+
+                            // Encriptamos la contraseña
+                            byte[] data = new byte[tbContraseña.Text.Length];
+                            byte[] contraseña;
+                            SHA512 shaM = new SHA512Managed();
+                            contraseña = shaM.ComputeHash(data);
+                            modificarEmpleado.Parameters.AddWithValue("@Password", contraseña);
                             modificarEmpleado.Parameters.AddWithValue("@id", pk);
+
                             try
                             {
                                 modificarEmpleado.ExecuteNonQuery();
@@ -334,21 +307,15 @@ namespace ProyectoWF {
                             modificarEmpleadoSinFoto.Parameters.AddWithValue("@Observaciones", tbObservaciones.Text);
 
                             modificarEmpleadoSinFoto.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
-                            if (checkUsuario.Checked)
-                            {
-                                modificarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
-                                // Encriptamos la contraseña
-                                byte[] data = new byte[tbContraseña.Text.Length];
-                                byte[] contraseña;
-                                SHA512 shaM = new SHA512Managed();
-                                contraseña = shaM.ComputeHash(data);
-                                modificarEmpleadoSinFoto.Parameters.AddWithValue("@Password", contraseña);
-                            }
-                            else
-                            {
-                                modificarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", DBNull.Value);
-                                modificarEmpleadoSinFoto.Parameters.AddWithValue("@Password", DBNull.Value);
-                            }
+
+                            modificarEmpleadoSinFoto.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+                            // Encriptamos la contraseña
+                            byte[] data = new byte[tbContraseña.Text.Length];
+                            byte[] contraseña;
+                            SHA512 shaM = new SHA512Managed();
+                            contraseña = shaM.ComputeHash(data);
+                            modificarEmpleadoSinFoto.Parameters.AddWithValue("@Password", contraseña);
+
                             modificarEmpleadoSinFoto.Parameters.AddWithValue("@id", pk);
                             try
                             {
@@ -398,24 +365,22 @@ namespace ProyectoWF {
                         tbCp.Text = dr.GetString(8);
                         tbPais.Text = dr.GetString(9);
                         mtbTelefono.Text = dr.GetString(10);
-                        // foto
+                        
+                        if (!dr.IsDBNull(11))
+                        {
+                            byte[] imageData;
+                            imageData = (byte[])dr[11];
+                            pbFoto.Image = Image.FromStream(new MemoryStream(imageData));
+                        }
+
                         tbObservaciones.Text = dr.GetString(12);
                         // fotoPath                        
                     } catch (SqlNullValueException sqlN) {
                     } catch (InvalidOperationException ioe) {
                     }
 
-                    if (dr.GetBoolean(14)) {
-                        checkUsuario.Checked = true;
-                        tbUsuario.Text = dr.GetString(15);
-                        tbContraseña.Text = dr.GetString(16);
-                        tbUsuario.Enabled = true;
-                        tbContraseña.Enabled = true;
-                    } else {
-                        checkUsuario.Checked = false;
-                        tbUsuario.Enabled = false;
-                        tbContraseña.Enabled = false;
-                    }
+                    tbUsuario.Text = dr.GetString(15);
+                    tbContraseña.Text = dr.GetString(16);
 
                 }
             } catch (SqlException sql)
@@ -459,6 +424,8 @@ namespace ProyectoWF {
             mtbTelefono.Text = "";
             pbFoto.Image = null;
             tbObservaciones.Text = "";
+            tbUsuario.Text = "";
+            tbContraseña.Text = "";
             // fotoPath 
         }
     }
