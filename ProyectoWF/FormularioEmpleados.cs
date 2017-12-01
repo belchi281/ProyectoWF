@@ -9,10 +9,30 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ProyectoWF {
+
+    /// <summary>
+    /// Clase principal del formulario de empleados.
+    /// Esta clase contiene todos los métodos necesarios para la gestión de empleados.
+    /// Dispone de atributos privados que forman las sentencias SQL necesarias además de los
+    /// métodos donde se ejecutan para poder insertar, modificar o listar empleados.
+    /// </summary>
     public partial class FormularioEmpleados : Form {
-        // Atributos
+
+        /// <summary>
+        /// Atributos.
+        /// Modo: Es el modo en el que el formulario se iniciara. Puede ser como “Alta, Modificación o Listado”.
+        /// Pk: Clave primaria recibida por parámetro en el constructor, utilizada para listar o modificar un empleado en concreto.
+        /// conn: Conexión a la base de datos, se utiliza un singleton para asegurar qué la conexión a la base de datos se realiza solo una vez y que no es nula.
+        /// insertarEmpleado: Comando que contiene la sentencia SQL necesaria para insertar un empleado en la base de datos.
+        /// modificarEmpleado: Comando que contiene la sentencia SQL necesaria para modificar un empleado en concreto en la base de datos.
+        /// insertarEmpleadoSinFoto: Sentencia SQL similar a la de insertar empleado pero quitando el campo Foto para introducir un nulo.
+        /// modificarEmpleadoSinFoto. Sentencia SQL similar a la de modificar empleado pero quitando el campo Foto para introducir un nulo.
+        /// consultarEmpleado: Sentencia SQL que ejecuta una QUERY que devuelve todos los datos de un empleado en concreto, si existe.
+        /// imagen: contiene la ruta de la imagen que se desea almacenar en la base de datos;
+        /// </summary>
         private int modo;
         private int pk;
+
         private SqlConnection conn;
         private SqlCommand insertarEmpleado;
         private SqlCommand modificarEmpleado;
@@ -22,6 +42,11 @@ namespace ProyectoWF {
         private string imagen = "";
 
         // Constructor
+        /// <summary>
+        /// constructor principal sobrecargado del formulario empleados.
+        /// </summary>
+        /// <param name="modo"> modo en el que se puede ejecutar el formulario.</param>
+        /// <param name="pk">clave primaria del empleado para realizar uan consulta.</param>
         public FormularioEmpleados(int modo, int pk)
         {
             this.modo = modo;
@@ -31,7 +56,7 @@ namespace ProyectoWF {
 
             // Base de datos
             conn = Conexion.getConexion();
-            if (conn != null)
+            if (conn != null) // Si la conexión a base de datos se ha realizado correctamente, preparamos las sentencias SQL necesarias.
             {
                 insertarEmpleado = new SqlCommand("INSERT INTO empleados VALUES(@Apellidos, @Nombre, @FecNac, @FecCont, @Direccion, @Ciudad, @Region, @Cp, @Pais, @Telefono," +
                     "@Foto, @Observaciones, @FotoPath, @EsUsuario, @Usuario, @Password)", conn);
@@ -61,7 +86,9 @@ namespace ProyectoWF {
                 datosEmpleado();
                 
             } else if (modo == 2) {
+
                 // Vista de datos
+                // Deshabilita todos los campos para evitar la modificación de los mismos.
                 this.Text = "Datos de empleado";
                 tbNombre.Enabled = false;
                 tbApellidos.Enabled = false;
@@ -83,6 +110,12 @@ namespace ProyectoWF {
             }
         }
 
+        /// <summary>
+        /// Acción que recoge el evento de “Click” del botón buscar foto.
+        /// Muestra un dialogo de búsqueda de ficheros en el cual se aplica un filtro para solo poder seleccionar imágenes.
+        /// </summary>
+        /// <param name="sender">Parámetro de tipo "object" que representa una referencia al objeto que lanza ese evento.</param>
+        /// <param name="e">Parámetro de tipo "EventArgs" que contiene el evento generado.</param>
         private void btBuscarFoto_Click(object sender, EventArgs e)
         {
             try
@@ -101,18 +134,23 @@ namespace ProyectoWF {
             }
         }
 
+        /// <summary>
+        /// Método que comprueba que los campos obligatorios “Nombre, Apellidos, Usuario y Contraseña están rellenados”.
+        /// </summary>
+        /// <returns>Devuelve true en caso de que los campos estén completos, y false en caso de que no.</returns>
         private Boolean faltanDatosObligatorios()
         {
-            if (tbNombre.Text.Length == 0 || tbApellidos.Text.Length == 0)
+            if (tbNombre.Text.Length == 0 || tbApellidos.Text.Length == 0 || tbUsuario.Text.Length == 0 || tbContraseña.Text.Length == 0)
                 return true;
-            if (checkUsuario.Checked)
-            {
-                if (tbUsuario.Text.Length == 0 || tbContraseña.Text.Length == 0)
-                    return true;
-            }
             return false;
         }
 
+        /// <summary>
+        /// Método que recoge el evento “Click” del botón aceptar.
+        /// Comprueba si la conexión es nula y dependiendo del modo en el que se haya creado el formulario ejecutara una acción u otra.
+        /// </summary>
+        /// <param name="sender">//</param>
+        /// <param name="e">//</param>
         private void btAceptar_Click(object sender, EventArgs e)
         {
             if (conn == null)
@@ -130,8 +168,10 @@ namespace ProyectoWF {
                             MessageBox.Show("Error! Rellena todos los campos obligatorios!");
                             return;
                         }
-                        
 
+                        /*
+                         * Dependiendo de la longitud de la ruta de la imagen ejecutaremos una insert u otra.
+                         */
                         if (imagen.Length > 0)
                         {
                             insertarEmpleado.Parameters.Clear();
@@ -164,6 +204,7 @@ namespace ProyectoWF {
 
                             insertarEmpleado.Parameters.AddWithValue("@EsUsuario", checkUsuario.Checked ? true : false);
                             insertarEmpleado.Parameters.AddWithValue("@Usuario", tbUsuario.Text);
+
                             // Encriptamos la contraseña
                             byte[] data = new byte[tbContraseña.Text.Length];
                             byte[] contraseña;
@@ -276,6 +317,7 @@ namespace ProyectoWF {
                             {
                                 modificarEmpleado.ExecuteNonQuery();
                                 MessageBox.Show("Empleado modificado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                limpiarCampos();
                             }
                             catch (SqlException sqlEx)
                             {
@@ -321,6 +363,7 @@ namespace ProyectoWF {
                             {
                                 modificarEmpleadoSinFoto.ExecuteNonQuery();
                                 MessageBox.Show("Empleado modificado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                limpiarCampos();
                             }
                             catch (SqlException sqlEx)
                             {
@@ -330,17 +373,29 @@ namespace ProyectoWF {
                         
                     }
                     break;
-                case 2:
+                case 2: // Esta opcion no realiza ninguna acción, asique simplemente cierra el formulario.
+                    {
+                        limpiarCampos();
+                        Close();
+                    }
                     break;
             }
         }
 
+        /// <summary>
+        /// Método que vacía los campos del formulario y lo cierra.
+        /// </summary>
+        /// <param name="sender">//</param>
+        /// <param name="e">//</param>
         private void btCancelar_Click(object sender, EventArgs e)
         {
             limpiarCampos();
             Close();
         }
 
+        /// <summary>
+        /// Método que ejecuta la sentencia SQL para obtener los datos de un empleado en concreto de la base de datos.
+        /// </summary>
         private void datosEmpleado()
         {
             SqlDataReader dr = null;
@@ -395,20 +450,9 @@ namespace ProyectoWF {
             }
         }
 
-        private void checkUsuario_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkUsuario = (CheckBox) sender;
-            if (checkUsuario.Checked)
-            {
-                tbUsuario.Enabled = true;
-                tbContraseña.Enabled = true;
-            } else
-            {
-                tbUsuario.Enabled = false;
-                tbContraseña.Enabled = false;
-            }
-        }
-
+        /// <summary>
+        /// Vacía todos los campos del formulario.
+        /// </summary>
         private void limpiarCampos()
         {
             tbId.Text = "";
@@ -426,7 +470,7 @@ namespace ProyectoWF {
             tbObservaciones.Text = "";
             tbUsuario.Text = "";
             tbContraseña.Text = "";
-            // fotoPath 
+            // fotoPath, no es necesario limpiarlo ni añadirlo.
         }
     }
 }

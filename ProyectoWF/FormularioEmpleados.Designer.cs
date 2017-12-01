@@ -26,6 +26,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tblPrincipal = new System.Windows.Forms.TableLayoutPanel();
             this.gbDatosPersonales = new System.Windows.Forms.GroupBox();
             this.tblDatosPersonales = new System.Windows.Forms.TableLayoutPanel();
@@ -75,6 +76,7 @@
             this.lbCamposObligatorios = new System.Windows.Forms.Label();
             this.btCancelar = new System.Windows.Forms.Button();
             this.btAceptar = new System.Windows.Forms.Button();
+            this.ttEsUsuario = new System.Windows.Forms.ToolTip(this.components);
             this.tblPrincipal.SuspendLayout();
             this.gbDatosPersonales.SuspendLayout();
             this.tblDatosPersonales.SuspendLayout();
@@ -580,8 +582,8 @@
             this.checkUsuario.Size = new System.Drawing.Size(75, 17);
             this.checkUsuario.TabIndex = 12;
             this.checkUsuario.Text = "Es usuario";
+            this.ttEsUsuario.SetToolTip(this.checkUsuario, "Si está habilitado, el empleado tendra permisos para iniciar sesión.");
             this.checkUsuario.UseVisualStyleBackColor = true;
-            this.checkUsuario.CheckedChanged += new System.EventHandler(this.checkUsuario_CheckedChanged);
             // 
             // tbUsuario
             // 
@@ -739,5 +741,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpFecCon;
+        private System.Windows.Forms.ToolTip ttEsUsuario;
     }
 }
